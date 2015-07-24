@@ -36,14 +36,20 @@ run("dos2unix",buildbot_path+"/shell/copy_file.sh")
 run("sudo","bash",buildbot_path+"/shell/copy_file.sh")
 
 
-composer_file_path="/root/slave/dmc/_root_storage_dmc/build/engine/composer.json"
-
-with open(composer_file_path, 'rb+') as filehandle:
-    filehandle.seek(-1, os.SEEK_END)
-    filehandle.truncate()
+composer_file_path="/opt/dmc/engine/composer.json"
 
 
-the_repositories="""  "repositories": [
+
+with open(composer_file_path, 'r') as filehandle:
+    the_str=filehandle.read()
+
+
+# with open(composer_file_path, 'rb+') as filehandle:
+    # filehandle.seek(-1, os.SEEK_END)
+    # filehandle.truncate()
+
+
+the_repositories="""  ,"repositories": [
    {
      "type": "composer",
      "url": "http://192.168.1.108"
@@ -51,10 +57,20 @@ the_repositories="""  "repositories": [
    {
      "packagist": false
    }
- ],}"""
+ ]
+}"""
+
+the_str=the_str.strip()
+re.sub("\}\s+$",the_repositories,the_str)
+
+
+with open(composer_file_path, 'w') as filehandle:
+    the_str=filehandle.write(
+        the_str
+    )
 
 #add file
-with open(composer_file_path, "a") as myfile:
-    myfile.write(the_repositories)
+# with open(composer_file_path, "a") as myfile:
+#     myfile.write(the_repositories)
 
 # run("sudo","cp","-rf",storage+"/")
