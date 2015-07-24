@@ -296,3 +296,6 @@ tests/tmp/*
 
 /tmp/session/*
 !/tmp/session
+
+
+*.sqlite

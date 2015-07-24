@@ -2,6 +2,9 @@ import os
 
 from twisted.application import service
 from buildbot.master import BuildMaster
+import sys
+path = "D:\\code\\buildbot\\master"
+sys.path.append(path)
 import configs
 basedir = configs.buildbot_basedir
 rotateLength = 10000000

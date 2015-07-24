@@ -25,6 +25,7 @@ def run(*l):
 def install():
     run('pip','install','buildbot')
     run('pip','install','buildbot-slave')
+    
 def start():
     run('buildbot','start','master')
 def restart():
@@ -63,9 +64,9 @@ def start_slave():
             if os.path.isdir(i['dir_name']):
                 print "slave dir name config error:%s" % [i['dir_name']]
                 exit()
-        elif i['dir_name'] not in os.listdir(os.getcwd()):
-            print "dir not in path error:%s" % [i['dir_name']]
-            exit()
+        # elif i['dir_name'] not in os.listdir(os.getcwd()):
+        #     print "dir not in path error:%s" % [i['dir_name']]
+        #     exit()
     for i in bc.slaves:
         run("buildslave","start",
             i['dir_name'])
@@ -83,14 +84,14 @@ def stop_slave():
 
 def print_help():
     print "help :\n\n--------------------------------\n"
-    print "start  \n 启动 buildbot \n"
-    print "restart  \n 重启 buildbot \n"
-    print "install  \n 安装 buildbot \n"
-    print "stop  \n 停止 buildbot \n"
+    print "start  \t buildbot "
+    print "restart  \t restart buildbot"
+    print "install  \t install buildbot "
+    print "stop  \t\t stop buildbot"
 
-    print "install-slave \n 自动安装 slave \n"
-    print "start-slave  \n 启动全部 slave \n"
-    print "stop-slave  \n 停止全部 slave \n"
+    print "install-slave \t auto install  slave"
+    print "start-slave  \t start all slave "
+    print "stop-slave  \t stop slave "
 
 #并启动
 def main():
